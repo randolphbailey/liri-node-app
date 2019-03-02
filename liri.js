@@ -31,9 +31,19 @@ function concertThis() {
     var search = "https://rest.bandsintown.com/artists/" + query + "/events?app_id=codingbootcamp";
     axios.get(search)
     .then(response => {
-        console.log(response);
+        for (i = 1; i < response.data.length; i++) {
+            var venue = response.data[i].venue.name;
+            var city = response.data[i].venue.city;
+            var date = moment(response.data[i].datetime).format(
+              "MMMM Do YYYY, h:mm a"
+            );
+            console.log("Show #" + i);
+            console.log("Venue :" + venue);
+            console.log("City: " + city);
+            console.log("Date: " + date);
+        }
     })
-      .catch(error => {
+    .catch(error => {
         console.log(error);
     });
 }
@@ -41,10 +51,16 @@ function concertThis() {
 function spotifyThis() {
     spotify.search({ type: 'track', query: query }, function(err, data) {
         if (err) {
-          return console.log('Error occurred: ' + err);
+            console.log("title: " + response.data.Title);
+            console.log("released in " + response.data.Year);
+            console.log("imdb: " + response.data.Ratings[0].Value);
+            console.log("rotten tomatoes: " + response.data.Ratings[1].Value);
+            console.log("was produced in " + response.data.Country);
+            console.log("languages: " + response.data.Language);
+            console.log("plot: " + response.data.Plot);
+            console.log("cast is : " + response.data.Actors);
         }
-       
-    console.log(data);
+    //console.log(data);
     });
 }
 
